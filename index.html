@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="WeatherApp">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Weathernan</title>
+    <link rel="stylesheet" href="look.css">
+
+
+  </head>
+  <body ng-controller="WeatherControl" class="ng-cloak" ng-cloak>
+    <input type="text" ng-keyup='$event.keyCode == 13 && getWeather() && getBackground()' class="search" placeholder="Name A City..." ng-model='city' ngsubmit="getWeather()">
+    <div class="temperature" ng-show="all.main.temp" ng-cloak>
+      {{ ((all.main.temp-273)*1.8+32).toFixed() }}<span class="unit">&deg</span>
+    </div>
+<!--
+    <input type="text" ng-keyup='$event.keyCode == 13 && getWeather() && getBackground()' class="search" placeholder="Name A City..." ng-model='city' ngsubmit="getWeather()">
+    <div class="results" ng-show="all.main.temp">
+      {{ ((all.main.temp-273)*1.8+32).toFixed() }} &#8457 <br><hr>
+      {{ (all.main.temp-273.15).toFixed() }} &#8457 <br><hr>
+      {{ all }}
+      {{ all }}
+    </div>
+
+-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="scripts/scripts.js"></script>
+    <script type="text/javascript" src="scripts.css/scripts.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      var citysite = 'http://data.okfn.org/data/core/world-cities/r/world-cities.json';
+      var cities = [];
+/*
+      $.getJSON(citysite, function(data){
+      });
+
+      console.log(cities);
+
+      function Match(word, cities){
+        var matched = new RegExp(word, 'gi');
+        return cities.filter(function(city){
+          return city.name(matched) || city.subcountry(matched);
+        });
+      };
+
+      function refresh(){
+        return Match();
+      }
+
+      $('.search').on('keyup', refresh);
+
+      //When button is clicked, get new background and weather
+
+      function getBackground(){
+      };
+
+      function getWeather(){};
+*/
+    var app = angular.module('WeatherApp', ['ngAnimate']);
+
+    $.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",
+        {
+            tags: rabbits,
+            tagmode: "any",
+            format: "json"
+        },
+
+        function(data) {
+            var rnd = Math.floor(Math.random() * data.items.length);
+
+            var image_src = data.items[0]['media']['m'].replace("_m", "_b");
+
+            $('body').css('background-image', "url('" + image_src + "')");
+
+        });
+
+    });
+
+    </script>
+  </body>
+</html>
